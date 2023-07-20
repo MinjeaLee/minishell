@@ -6,7 +6,7 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:46:33 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/20 15:28:24 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:40:43 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,21 @@
 
 static int	home_cd(t_pipe *pipe, t_info *info)
 {
+	char	**str;
+
 	if (pipe->exe_in_par == TRUE)
 	{
-		if (chdir(ft_split(get_env_val("HOME=", info), '=')[1]) == FAILURE)
+		str = ft_split(get_env_val("HOME=", info), '=');
+		if (chdir(str[1]) == FAILURE)
+		{
+			free(str[0]);
+			free(str[1]);
+			free(str);
 			return (ft_perror(SUCCESS));
+		}
+		free(str[0]);
+		free(str[1]);
+		free(str);
 		return (SUCCESS);
 	}
 	else

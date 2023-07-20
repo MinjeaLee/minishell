@@ -6,11 +6,35 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:43:14 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/11 15:43:15 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 03:06:30 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	free_en(t_cha_env *cv, char **str, int flag)
+{
+	if (flag == 1)
+	{
+		free(cv->target);
+		free(cv->env);
+	}
+	else if (flag == 2)
+	{
+		free(cv->target);
+		free(cv->env);
+		free(cv->tmp1);
+	}
+	else if (flag == 3)
+	{
+		free(cv->env);
+		free(cv->tmp1);
+		free(cv->token->s);
+	}
+	free(str[0]);
+	free(str[1]);
+	free(str);
+}
 
 void	free_cmd(t_cmd *cmd, size_t pipe_i)
 {

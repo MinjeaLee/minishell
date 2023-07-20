@@ -6,7 +6,7 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:12:11 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 01:28:15 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:56:25 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_token	set_token(char *token_str, int index)
 {
 	t_token	new_token;
 
-	new_token.s = token_str;
+	new_token.s = ft_strdup(token_str);
 	new_token.token_index = index;
 	if (ft_strcmp(token_str, "|") == 0)
 		new_token.type = PIPE;
@@ -73,6 +73,7 @@ t_token	set_token(char *token_str, int index)
 		new_token.type = REDIRECT;
 	else
 		new_token.type = KEY;
+	free(token_str);
 	return (new_token);
 }
 
@@ -82,7 +83,6 @@ int	tokenize_line(t_info *info, t_parse *parse)
 	size_t	num_tokens;
 	size_t	i;
 
-	num_tokens = 0;
 	i = 0;
 	parse->line = add_space(parse->line);
 	tokens_str = split_respect_quote(parse->line, ' ');
@@ -102,5 +102,6 @@ int	tokenize_line(t_info *info, t_parse *parse)
 		parse->tokens[i] = set_token(tokens_str[i], i);
 		i++;
 	}
+	free(tokens_str);
 	return (1);
 }

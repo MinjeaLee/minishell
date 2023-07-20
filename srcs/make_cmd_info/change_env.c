@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   change_env.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
+/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:50:47 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/20 23:47:07 by mi               ###   ########.fr       */
+/*   Updated: 2023/07/21 03:06:23 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,26 +57,24 @@ static int	change_env(t_info *info, t_cha_env *cv)
 
 static int	add_env(t_info *info, t_cha_env *cv)
 {
+	char	**str;
+
+	str = ft_split(get_env_val(cv->env, info), '=');
 	cv->token->s[cv->start] = '\0';
-	cv->env_len = ft_strlen(ft_split(get_env_val(cv->env, info), '=')[1]);
-	cv->tmp1 = ft_strjoin(cv->token->s, \
-		ft_split(get_env_val(cv->env, info), '=')[1]);
+	cv->env_len = ft_strlen(str[1]);
+	cv->tmp1 = ft_strjoin(cv->token->s, str[1]);
 	if (cv->tmp1 == NULL)
 	{
-		free(cv->target);
-		free(cv->env);
+		free_en(cv, str, 1);
 		return (ft_error("change env error\n", FAILURE));
 	}
 	cv->tmp2 = ft_strjoin(cv->tmp1, &cv->token->s[cv->string_index + 1]);
 	if (cv->tmp2 == NULL)
 	{
-		free(cv->target);
-		free(cv->env);
-		free(cv->tmp1);
+		free_en(cv, str, 2);
 		return (ft_error("change env error\n", FAILURE));
 	}
-	free(cv->env);
-	free(cv->tmp1);
+	free_en(cv, str, 3);
 	cv->token->s = cv->tmp2;
 	return (SUCCESS);
 }
@@ -127,8 +125,11 @@ int	if_env_change(t_info *info, char **line, size_t token_count)
 				return (FAILURE);
 			cha_env->string_index++;
 		}
+		free(line[cha_env->token_index]);
 		line[cha_env->token_index] = cha_env->token->s;
 		cha_env->token_index++;
+		free(cha_env->token);
 	}
+	free(cha_env);
 	return (SUCCESS);
 }

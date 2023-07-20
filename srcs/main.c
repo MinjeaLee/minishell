@@ -6,7 +6,7 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:26:58 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/21 01:20:36 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 02:22:08 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,16 @@ static int	memory_parse(t_parse *parse, t_info *info)
 {
 	size_t	i;
 
+	if (info->last_c != 0)
+	{
+		i = 0;
+		while ((int)i < info->last_c)
+		{
+			free(info->last_v[i]);
+			i++;
+		}
+		free(info->last_v);
+	}
 	info->last_c = (int) parse->token_count;
 	info->last_v = (char **)malloc(sizeof(char *) * (parse->token_count + 1));
 	if (info->last_v == NULL)
