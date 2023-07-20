@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   new_quote_split_list_utils.c                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
+/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/17 22:34:08 by mi                #+#    #+#             */
-/*   Updated: 2023/07/18 00:24:01 by mi               ###   ########.fr       */
+/*   Updated: 2023/07/21 01:21:22 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ char	**make_quote_split_strs(char *str)
 	int		word_len;
 
 	strs_count = quote_split_strs_count(str);
-	result = (char **)malloc(sizeof(char *) * (strs_count + 1));
+	result = (char **)ft_malloc(sizeof(char *) * (strs_count + 1));
 	i = 0;
 	result[strs_count] = NULL;
 	while (i < strs_count)
