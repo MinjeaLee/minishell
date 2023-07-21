@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:12:11 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 21:26:21 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 23:57:53 by mi               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,34 +77,45 @@ t_token	set_token(char *token_str, int index)
 	return (new_token);
 }
 
+void	while_set_token(t_parse *parse, char **tokens_str, size_t num_tokens)
+{
+	size_t	token_index;
+	size_t	strs_index;
+
+	token_index = 0;
+	strs_index = 0;
+	while (strs_index < num_tokens)
+	{
+		if (tokens_str[strs_index][0] == '\0')
+		{
+			strs_index++;
+			continue ;
+		}
+		parse->tokens[token_index] = set_token(tokens_str[strs_index], \
+		token_index);
+		token_index++;
+	}
+	parse->token_count = token_index;
+}
+
 int	tokenize_line(t_info *info, t_parse *parse)
 {
 	char	**tokens_str;
 	size_t	num_tokens;
-	size_t	i;
-	size_t	j;
 
 	parse->line = add_space(parse->line);
 	tokens_str = split_respect_quote(parse->line, ' ');
 	if (tokens_str == NULL)
 		return (print_syntax_error());
-	j = count_strs(tokens_str);
 	if_env_change(info, tokens_str, count_strs(tokens_str));
-	if (tokens_str[0][0] == '\0')
+	if (tokens_str[0][0] == '\0' && count_strs(tokens_str) == 1)
 		return (parsing_free(tokens_str));
 	tokens_str = remove_quote(tokens_str);
 	if (tokens_str == NULL)
 		return (print_syntax_error());
-	// num_tokens = count(tokens_str, j);
 	num_tokens = count_strs(tokens_str);
 	parse->tokens = ft_malloc(sizeof(t_token) * (num_tokens));
-	i = 0;
-	parse->token_count = num_tokens;
-	while (i < j)
-	{
-		parse->tokens[i] = set_token(tokens_str[i], i);
-		i++;
-	}
+	while_set_token(parse, tokens_str, num_tokens);
 	free(tokens_str);
 	return (1);
 }
