@@ -6,7 +6,7 @@
 /*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:12:11 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 15:11:39 by mi               ###   ########.fr       */
+/*   Updated: 2023/07/21 20:19:11 by mi               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ int	tokenize_line(t_info *info, t_parse *parse)
 	if (tokens_str == NULL)
 		return (print_syntax_error());
 	if_env_change(info, tokens_str, count_strs(tokens_str));
+	if (tokens_str[0][0] == '\0')
+		return (-1);
 	tokens_str = remove_quote(tokens_str);
 	if (tokens_str == NULL)
 		return (print_syntax_error());
