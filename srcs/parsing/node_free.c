@@ -6,7 +6,7 @@
 /*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 19:36:04 by mi                #+#    #+#             */
-/*   Updated: 2023/07/17 23:21:43 by mi               ###   ########.fr       */
+/*   Updated: 2023/07/21 21:52:57 by mi               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	destroy_nodes(t_quote **head)
 
 void	free_node(t_quote *node)
 {
-	if (*(node->str) != '\0')
+	if ((node->str) != NULL)
 		free(node->str);
 	free(node);
 }

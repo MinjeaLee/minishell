@@ -6,7 +6,7 @@
 /*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 19:27:16 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 15:19:40 by mi               ###   ########.fr       */
+/*   Updated: 2023/07/21 22:06:55 by mi               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,13 @@ char	**remove_quote(char **strs)
 	copy_data_to_node(&head, strs);
 	split_quote(&head);
 	if (syntax_check(head) == -1)
+	{
+		destroy_nodes(&head);
+		while(strs[i])
+			free(strs[i++]);
+		free(strs);
 		return (NULL);
+	}
 	dequote(&head);
 	modify_index(&head);
 	result = dequoted_merge(&head);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 19:29:08 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 21:06:09 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 22:02:36 by mi               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,3 +61,4 @@ t_quote	*copy_node(t_quote *node)
 	new->next = NULL;
 	return (new);
 }
+
