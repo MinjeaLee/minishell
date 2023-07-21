@@ -6,7 +6,11 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:26:58 by heejunki          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2023/07/22 00:27:26 by heejunki         ###   ########.fr       */
+=======
+/*   Updated: 2023/07/22 00:12:15 by heejunki         ###   ########.fr       */
+>>>>>>> 96c96f7ed57d3bd92df5ddd83978672cf6be77ef
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +65,17 @@ static void	parse_exe(t_parse *parse, t_cmd *cmd, t_info *info)
 	tmp = tokenize_line(info, parse);
 	if (tmp == -1)
 		return ;
+<<<<<<< HEAD
 	if (make_cmd_info(parse, cmd, info) == FAILURE)
 		return ;
+=======
+	// for (size_t i = 0; i < parse->token_count; i++)
+	// 	printf("token[%zu]: %s\n", i, parse->tokens[i].s);
+	if (make_cmd_info(parse, cmd, info) == FAILURE)
+		return ;
+	// for (size_t i = 0; i < parse->token_count; i++)
+	// 	printf("token[%zu]: %s\n", i, parse->tokens[i].s);
+>>>>>>> 96c96f7ed57d3bd92df5ddd83978672cf6be77ef
 	if (exe_cmd(parse, cmd, info) == FAILURE)
 	{
 		free_mini(parse, cmd);
