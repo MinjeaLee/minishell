@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
+/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 19:27:16 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 22:06:55 by mi               ###   ########.fr       */
+/*   Updated: 2023/07/21 22:12:49 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ char	**remove_quote(char **strs)
 	if (syntax_check(head) == -1)
 	{
 		destroy_nodes(&head);
-		while(strs[i])
+		while (strs[i])
 			free(strs[i++]);
 		free(strs);
 		return (NULL);

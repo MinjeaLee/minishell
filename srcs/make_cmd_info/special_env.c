@@ -6,7 +6,7 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:51:58 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/21 02:45:36 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/22 00:25:28 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	change_abs(t_info *info, t_cha_env *cv)
 {
 	char	**str;
 
+	if (get_env_val("HOME=", info) == NULL)
+		return (SUCCESS);
 	cv->tmp1 = ft_strjoin(get_env_val("HOME=", info), \
 		&cv->token->s[cv->string_index + 1]);
 	if (cv->tmp1 == NULL)
