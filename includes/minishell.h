@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:25:04 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/21 03:05:51 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:20:56 by mi               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -285,5 +285,8 @@ t_quote	*new_quote_split_list(t_quote **head, t_quote *current);
 void	rearrange_index(t_quote **head);
 int		check_one_word(char *str);
 int		check_one_word_push_to_endpoint(char *str, char c);
+
+int		syntax_check(t_quote *head);
+int		print_syntax_error(void);
 
 #endif

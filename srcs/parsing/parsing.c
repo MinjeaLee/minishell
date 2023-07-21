@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:12:11 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 02:56:25 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:11:39 by mi               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,11 @@ int	tokenize_line(t_info *info, t_parse *parse)
 	parse->line = add_space(parse->line);
 	tokens_str = split_respect_quote(parse->line, ' ');
 	if (tokens_str == NULL)
-	{
-		printf("minishell: syntax error\n");
-		g_exit_code = 258;
-		return (-1);
-	}
+		return (print_syntax_error());
 	if_env_change(info, tokens_str, count_strs(tokens_str));
 	tokens_str = remove_quote(tokens_str);
+	if (tokens_str == NULL)
+		return (print_syntax_error());
 	num_tokens = count_strs(tokens_str);
 	parse->tokens = ft_malloc(sizeof(t_token) * (num_tokens));
 	parse->token_count = num_tokens;

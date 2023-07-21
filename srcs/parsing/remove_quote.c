@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
+/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 19:27:16 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 01:26:16 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 15:19:40 by mi               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,8 @@ char	**remove_quote(char **strs)
 	i = 0;
 	copy_data_to_node(&head, strs);
 	split_quote(&head);
+	if (syntax_check(head) == -1)
+		return (NULL);
 	dequote(&head);
 	modify_index(&head);
 	result = dequoted_merge(&head);
