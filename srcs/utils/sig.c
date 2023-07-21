@@ -6,7 +6,7 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:28:54 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/06 14:30:37 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:32:58 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,19 @@ void	sig_heredoc_child(int signo)
 void	sig_heredoc_parent(int signo)
 {
 	(void)signo;
-	write(STDOUT_FILENO, "\n", 1);
+	printf("\n");
 }
 
 void	sig_parent(int signo)
 {
 	if (signo == SIGINT)
 	{
-		write(STDOUT_FILENO, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 1);
-		rl_redisplay();
+		printf("^C\n");
 		g_exit_code = 1;
 	}
 	else if (signo == SIGQUIT)
 	{
-		write(STDOUT_FILENO, "Quit: 3\n", 8);
+		printf("^\\Quit: %d\n", signo);
 		g_exit_code = 131;
 	}
 }
