@@ -6,29 +6,11 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:50:47 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/21 03:06:23 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 19:56:50 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	*get_env_val(char *key, t_info *info)
-{
-	char	*env_val;
-	t_node	*node;
-
-	node = info->env_list.front;
-	while (node)
-	{
-		env_val = node->content;
-		if (ft_strncmp(env_val, key, ft_strlen(key)) == 0)
-			return (env_val);
-		if (node->next == NULL)
-			break ;
-		node = node->next;
-	}
-	return (NULL);
-}
 
 static int	change_env(t_info *info, t_cha_env *cv)
 {
@@ -106,25 +88,39 @@ static int	is_env(t_info *info, t_cha_env *cv)
 	return (SUCCESS);
 }
 
-int	if_env_change(t_info *info, char **line, size_t token_count)
+static int	go_env(t_cha_env *cha_env, t_info *info, int s_quote)
 {
-	t_cha_env	*cha_env;
-
-	cha_env = (t_cha_env *) malloc(sizeof(t_cha_env));
-	cha_env->token_index = 0;
-	while (cha_env->token_index < token_count)
+	while (cha_env->token->s[cha_env->string_index])
 	{
-		if (token_to_cha(cha_env, line[cha_env->token_index]) == FAILURE)
-			return (FAILURE);
-		while (cha_env->token->s[cha_env->string_index])
+		if (cha_env->token->s[cha_env->string_index] == '\'')
+			s_quote *= -1;
+		if (s_quote == 1)
 		{
 			if (check_here(cha_env->token->s[cha_env->string_index], \
 			cha_env->token->s[cha_env->string_index + 1]) == TRUE)
 				break ;
 			if (is_env(info, cha_env) == FAILURE)
 				return (FAILURE);
-			cha_env->string_index++;
 		}
+		cha_env->string_index++;
+	}
+	return (SUCCESS);
+}
+
+int	if_env_change(t_info *info, char **line, size_t token_count)
+{
+	t_cha_env	*cha_env;
+	int			s_quote;
+
+	cha_env = (t_cha_env *) malloc(sizeof(t_cha_env));
+	cha_env->token_index = 0;
+	while (cha_env->token_index < token_count)
+	{
+		s_quote = 1;
+		if (token_to_cha(cha_env, line[cha_env->token_index]) == FAILURE)
+			return (FAILURE);
+		if (go_env(cha_env, info, s_quote) == FAILURE)
+			return (FAILURE);
 		free(line[cha_env->token_index]);
 		line[cha_env->token_index] = cha_env->token->s;
 		cha_env->token_index++;
