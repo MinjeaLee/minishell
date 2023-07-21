@@ -6,7 +6,7 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 19:29:08 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 01:26:00 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 21:06:09 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@ void	copy_data_to_node(t_quote **head, char **strs)
 
 	i = 0;
 	current = *head;
-	while (strs[i] && strs[i][0] != '\0')
+	// while (strs[i] && strs[i][0] != '\0')
+	while (strs[i] && strs[i] != NULL)
 	{
 		new = new_quote_node(strs[i], i, -1);
 		if (i == 0)

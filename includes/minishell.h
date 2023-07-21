@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
+/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:25:04 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/21 15:20:56 by mi               ###   ########.fr       */
+/*   Updated: 2023/07/21 21:15:56 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,6 +201,7 @@ int		malloc_re(t_parse *parse, t_pipe *pipe, size_t index);
 int		malloc_cmd(t_parse *parse, t_pipe *pipe, size_t index);
 
 void	exe_child(t_info *info, t_parse *parse, t_cmd *cmd, t_pipe *pipe);
+int		parsing_free(char **tokens_str);
 
 void	set_fd(t_cmd *cmd, t_pipe *pipe);
 void	set_redirect_fd(t_pipe *pipe);
@@ -218,7 +219,7 @@ int		exe_builtin(t_parse *parse, t_cmd *cmd, t_info *info, t_pipe *pipe);
 int		exe_builtin_parent(t_parse *parse, t_cmd *cmd, t_info *info, \
 		t_pipe *pipe);
 
-int		exe_cd(t_pipe *pipe, t_info *info);
+int		exe_cd(t_pipe *pipe);
 int		exe_echo(t_pipe *pipe);
 int		exe_env(t_parse *parse, t_cmd *cmd, t_info *info, t_pipe *pipe);
 int		exe_exit(t_parse *parse, t_cmd *cmd, t_info *info, t_pipe *pipe);
@@ -255,6 +256,7 @@ int		tokenize_line(t_info *info, t_parse *parse);
 
 // parsing_utils.c
 size_t	count_strs(char **strs);
+size_t	count(char **strs, size_t i);
 
 // quote.c
 char	**split_respect_quote(char *str, char c);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
+/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:12:11 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 20:19:11 by mi               ###   ########.fr       */
+/*   Updated: 2023/07/21 21:26:21 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,22 +82,25 @@ int	tokenize_line(t_info *info, t_parse *parse)
 	char	**tokens_str;
 	size_t	num_tokens;
 	size_t	i;
+	size_t	j;
 
-	i = 0;
 	parse->line = add_space(parse->line);
 	tokens_str = split_respect_quote(parse->line, ' ');
 	if (tokens_str == NULL)
 		return (print_syntax_error());
+	j = count_strs(tokens_str);
 	if_env_change(info, tokens_str, count_strs(tokens_str));
 	if (tokens_str[0][0] == '\0')
-		return (-1);
+		return (parsing_free(tokens_str));
 	tokens_str = remove_quote(tokens_str);
 	if (tokens_str == NULL)
 		return (print_syntax_error());
+	// num_tokens = count(tokens_str, j);
 	num_tokens = count_strs(tokens_str);
 	parse->tokens = ft_malloc(sizeof(t_token) * (num_tokens));
+	i = 0;
 	parse->token_count = num_tokens;
-	while (i < num_tokens)
+	while (i < j)
 	{
 		parse->tokens[i] = set_token(tokens_str[i], i);
 		i++;
