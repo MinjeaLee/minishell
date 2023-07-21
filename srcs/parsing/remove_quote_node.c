@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   remove_quote_node.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
+/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/16 19:29:08 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 22:02:36 by mi               ###   ########.fr       */
+/*   Updated: 2023/07/21 22:14:33 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ void	copy_data_to_node(t_quote **head, char **strs)
 
 	i = 0;
 	current = *head;
-	// while (strs[i] && strs[i][0] != '\0')
 	while (strs[i] && strs[i] != NULL)
 	{
 		new = new_quote_node(strs[i], i, -1);
@@ -61,4 +60,3 @@ t_quote	*copy_node(t_quote *node)
 	new->next = NULL;
 	return (new);
 }
-

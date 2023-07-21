@@ -6,7 +6,7 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:48:15 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/20 15:28:24 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 22:07:36 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,12 @@ int	exe_exit(t_parse *parse, t_cmd *cmd, t_info *info, t_pipe *pipe)
 	}
 	exit_option(cmd);
 	exit_val = ft_atoi(cmd->pipe[cmd->pipe_index].cmd[1]);
+	if (exit_val == 255 && ft_strcmp(cmd->pipe[cmd->pipe_index].cmd[1], "255"))
+	{
+		printf("minishell: exit: %s: numeric argument required\n", \
+			cmd->pipe[cmd->pipe_index].cmd[1]);
+		exit(255);
+	}
 	ft_lstclear(&info->env_list);
 	free_mini(parse, cmd);
 	exit(exit_val);

@@ -6,7 +6,7 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/06 14:26:58 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/21 20:43:28 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 22:15:13 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ static void	parse_exe(t_parse *parse, t_cmd *cmd, t_info *info)
 	tmp = tokenize_line(info, parse);
 	if (tmp == -1)
 		return ;
-	printf("%d", tmp);
 	for (size_t i = 0; i < parse->token_count; i++)
 		printf("token[%zu]: %s\n", i, parse->tokens[i].s);
 	if (make_cmd_info(parse, cmd, info) == FAILURE)
