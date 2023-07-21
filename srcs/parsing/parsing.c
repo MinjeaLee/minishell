@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mi <mi@student.42seoul.kr>                 +#+  +:+       +#+        */
+/*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/08 15:12:11 by mi                #+#    #+#             */
-/*   Updated: 2023/07/21 23:57:53 by mi               ###   ########.fr       */
+/*   Updated: 2023/07/22 00:11:39 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ void	while_set_token(t_parse *parse, char **tokens_str, size_t num_tokens)
 		parse->tokens[token_index] = set_token(tokens_str[strs_index], \
 		token_index);
 		token_index++;
+		strs_index++;
 	}
 	parse->token_count = token_index;
 }
