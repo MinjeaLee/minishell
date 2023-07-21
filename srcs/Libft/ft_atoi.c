@@ -6,7 +6,7 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/10 09:47:54 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/21 22:02:16 by heejunki         ###   ########.fr       */
+/*   Updated: 2022/11/19 15:15:54 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	ft_atoi(const char *str)
 	while (*str >= '0' && *str <= '9')
 	{
 		if (check_max_or_min(num, *str, minus) != 1)
-			return (255);
+			return (check_max_or_min(num, *str, minus));
 		num = num * 10 + (*str++ - '0');
 	}
 	return (num * minus);

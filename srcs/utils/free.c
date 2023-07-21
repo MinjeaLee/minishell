@@ -6,7 +6,7 @@
 /*   By: heejunki <heejunki@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/11 15:43:14 by heejunki          #+#    #+#             */
-/*   Updated: 2023/07/21 22:14:15 by heejunki         ###   ########.fr       */
+/*   Updated: 2023/07/21 20:26:51 by heejunki         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ void	free_mini(t_parse *parse, t_cmd *cmd)
 	free_tokens(parse, parse->token_count);
 	free_cmd(cmd, cmd->pipe_count);
 }
+
 
 int	parsing_free(char **tokens_str)
 {
